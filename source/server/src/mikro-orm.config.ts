@@ -3,5 +3,5 @@ export default {
   type: 'postgresql',
   entitiesTs: ['./src/entities'],
   entities: ['./dist/entities'],
-  autoLoadEntities: true
+  autoLoadEntities: true,
 };

@@ -5,6 +5,7 @@ import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { MikroOrmModuleSyncOptions } from '@mikro-orm/nestjs/typings';
 import { SqlHighlighter } from '@mikro-orm/sql-highlighter';
 import { UnderscoreNamingStrategy } from '@mikro-orm/core';
+import { AuthModule } from './auth/auth.module';
 
 const logger = new Logger('MikroORM');
 
@@ -15,19 +16,16 @@ const ormConfig: MikroOrmModuleSyncOptions = {
   entities: ['./dist/entities'],
   autoLoadEntities: true,
   discovery: {
-    warnWhenNoEntities: true
+    warnWhenNoEntities: true,
   },
-  namingStrategy: UnderscoreNamingStrategy ,
+  namingStrategy: UnderscoreNamingStrategy,
   highlighter: new SqlHighlighter(),
   debug: true,
-  logger: logger.log.bind(logger)
+  logger: logger.log.bind(logger),
 };
 
-
 @Module({
-  imports: [
-    MikroOrmModule.forRoot(ormConfig)
-  ],
+  imports: [MikroOrmModule.forRoot(ormConfig), AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })
