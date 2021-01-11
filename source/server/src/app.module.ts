@@ -5,13 +5,14 @@ import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { MikroOrmModuleSyncOptions } from '@mikro-orm/nestjs/typings';
 import { SqlHighlighter } from '@mikro-orm/sql-highlighter';
 import { UnderscoreNamingStrategy } from '@mikro-orm/core';
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { OrmModule } from './modules/orm/orm.module';
 
 const logger = new Logger('MikroORM');
 
-const ormConfig: MikroOrmModuleSyncOptions = {
+/*const ormConfig: MikroOrmModuleSyncOptions = {
   type: 'postgresql',
-  dbName: 'mymikroormdemo',
+  dbName: 'packlist',
   entitiesTs: ['./src/entities'],
   entities: ['./dist/entities'],
   autoLoadEntities: true,
@@ -22,10 +23,10 @@ const ormConfig: MikroOrmModuleSyncOptions = {
   highlighter: new SqlHighlighter(),
   debug: true,
   logger: logger.log.bind(logger),
-};
+};*/
 
 @Module({
-  imports: [MikroOrmModule.forRoot(ormConfig), AuthModule],
+  imports: [OrmModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })
