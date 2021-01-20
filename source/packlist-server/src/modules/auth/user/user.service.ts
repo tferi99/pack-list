@@ -1,38 +1,68 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@mikro-orm/nestjs';
-import { EntityManager, EntityRepository, MikroORM, QueryOrder, wrap } from '@mikro-orm/core';
+import { EntityManager, EntityRepository } from '@mikro-orm/core';
 import { User } from '../../../entities/User';
+import { MikroOrmUtil } from '../../../common/utils/MikroOrmUtil';
+import { MikroOrmCrudServiceBase } from '../../../common/services/MikroOrmCrudServiceBase';
 
 @Injectable()
-export class UserService {
+export class UserService extends MikroOrmCrudServiceBase<User, 'id'> {
   constructor(
     @InjectRepository(User)
-    private readonly repo: EntityRepository<User>,
-    private readonly orm: MikroORM,
-    private readonly em: EntityManager
-  ) {}
-
-  async getAll(): Promise<User[]> {
-    console.log('### getAll')
-    //return this.repo.findAll({}, { id2: QueryOrder.DESC }, 3);
-    //return this.repo.find({}, { id2: QueryOrder.DESC }, 3);
-    //return this.em.find(User, {});
-    //return this.em.find(User, { id: { $gte: 3 } }, [], { id: 'ASC' }, 3);
-    return this.repo.find({ id: { $gte: 3 } }, [], { id: 'ASC' }, 3 );
+    private readonly repo: EntityRepository<User>, // private readonly orm: MikroORM,
+    private readonly em: EntityManager,
+  ) {
+    super();
   }
 
-  async save(dto: User): Promise<User> {
-    const user = new User();
-    wrap(user).assign(dto);
-    //await this.repo.persist(u);
-    await this.repo.persistAndFlush(user);
-/*    console.log('### POST: ', user);
-    await this.repo.persist(user);*/
-    //const newObj = this.em.create(User, user);
+  //-------------------- abstract ------------------------
+  getEntityRepository(): EntityRepository<User> {
+    return this.repo;
+  }
 
-/*    await this.em.persistAndFlush(newObj);
-    //await this.em.persist(newObj);*/
+  newEntity(): User {
+    return new User();
+  }
 
-    return user;
+  //-------------------- custom ------------------------
+  async test(): Promise<void> {
+    // fetch objects
+    const u = await this.get(3);
+
+    // fetch create objects
+    const u2 = new User();
+    u2.username = 'Peti';
+    u2.password = '123';
+    u2.active = true;
+    u2.admin = false;
+    await this.em.persist(u2);
+
+    const u3 = new User();
+    // u3.id = 10000;            // this ID will be NULL
+    u3.username = 'Anna';
+    u3.password = 'xyz';
+    u3.active = false;
+    u3.admin = false;
+    await this.em.persist(u3);
+
+    if (u) {
+      if (u.rank === null) {
+        u.rank = 0;
+      } else {
+        u.rank++;
+      }
+    }
+
+    const u4 = this.repo.getReference(10000);
+    this.repo.remove(u4);
+
+    console.log('------------------------ test ----------------------------------');
+    MikroOrmUtil.dumpAll(this.em);
+    console.log('------------------------------- end ----------------------------------------');
+    await this.em.flush();
+  }
+
+  async getByFilter(username: string): Promise<User[]> {
+    return this.repo.find({ username });
   }
 }

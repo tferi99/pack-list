@@ -1,14 +1,10 @@
-import { Logger, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MikroOrmModule } from '@mikro-orm/nestjs';
-import { MikroOrmModuleSyncOptions } from '@mikro-orm/nestjs/typings';
-import { SqlHighlighter } from '@mikro-orm/sql-highlighter';
-import { UnderscoreNamingStrategy } from '@mikro-orm/core';
 import { AuthModule } from './modules/auth/auth.module';
 import { OrmModule } from './modules/orm/orm.module';
 
-const logger = new Logger('MikroORM');
+//const logger = new Logger('MikroORM');
 
 /*const ormConfig: MikroOrmModuleSyncOptions = {
   type: 'postgresql',

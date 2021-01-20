@@ -1,14 +1,14 @@
-import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
+import { BaseEntity, Entity, PrimaryKey, Property } from '@mikro-orm/core';
 
-@Entity({ tableName: 'app-user' })
-export class User {
+@Entity({ tableName: 'app_user' })
+export class User extends BaseEntity<User, 'id'> {
   @PrimaryKey()
   id!: number;
 
-  @Property()
+  @Property({ length: 128 })
   username!: string;
 
-  @Property()
+  @Property({ length: 128 })
   password!: string;
 
   @Property({ default: false })
@@ -16,4 +16,7 @@ export class User {
 
   @Property({ default: true })
   active!: boolean;
+
+  @Property({ nullable: true })
+  rank?: number;
 }

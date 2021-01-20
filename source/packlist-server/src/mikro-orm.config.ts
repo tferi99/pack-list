@@ -10,6 +10,8 @@ import { UnderscoreNamingStrategy } from '@mikro-orm/core';
 import { SqlHighlighter } from '@mikro-orm/sql-highlighter';
 import { logger } from '@mikro-orm/nestjs';
 
+//const logger = new Logger('MikroORM');
+
 export default {
   type: 'postgresql',
   dbName: 'packlist',
