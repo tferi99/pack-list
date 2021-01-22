@@ -1,4 +1,5 @@
-import { BaseEntity, Entity, PrimaryKey, Property } from '@mikro-orm/core';
+import { BaseEntity, Entity, OneToMany, PrimaryKey, Property } from '@mikro-orm/core';
+import { Category } from './Category';
 
 @Entity({ tableName: 'app_user' })
 export class User extends BaseEntity<User, 'id'> {
