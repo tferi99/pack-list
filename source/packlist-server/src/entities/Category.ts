@@ -11,7 +11,7 @@ export class Category extends BaseEntity<Category, 'id'> {
   name!: string;
 
   @Property()
-  active!: boolean;
+  order!: number;
 
   @ManyToOne(() => User)
   owner: User;

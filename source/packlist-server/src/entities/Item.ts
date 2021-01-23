@@ -10,7 +10,7 @@ export class Item extends BaseEntity<Item, 'id'> {
   name!: string;
 
   @Property()
-  active!: boolean;
+  order!: number;
 
   @ManyToOne(() => Category)
   category!: Category;
