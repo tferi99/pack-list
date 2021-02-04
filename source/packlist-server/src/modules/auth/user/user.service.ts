@@ -20,14 +20,14 @@ export class UserService extends MikroOrmCrudServiceBase<User, 'id'> {
     return this.repo;
   }
 
-  newEntity(): User {
+  createNewEntity(): User {
     return new User();
   }
 
   //-------------------- custom ------------------------
   async test(): Promise<void> {
     // fetch objects
-    const u = await this.get(3);
+    await this.get(3);
 
     // fetch create objects
     const u2 = new User();
@@ -44,14 +44,6 @@ export class UserService extends MikroOrmCrudServiceBase<User, 'id'> {
     u3.active = false;
     u3.admin = false;
     await this.em.persist(u3);
-
-    if (u) {
-      if (u.rank === null) {
-        u.rank = 0;
-      } else {
-        u.rank++;
-      }
-    }
 
     const u4 = this.repo.getReference(10000);
     this.repo.remove(u4);

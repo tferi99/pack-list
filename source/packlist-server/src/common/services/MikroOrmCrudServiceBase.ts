@@ -3,10 +3,10 @@ import { BaseEntity, EntityRepository, QueryOrder, wrap } from '@mikro-orm/core'
 
 export abstract class MikroOrmCrudServiceBase<T extends BaseEntity<T, PK>, PK extends keyof T> {
   abstract getEntityRepository(): EntityRepository<T>;
-  abstract newEntity(): T;
+  abstract createNewEntity(): T;
 
   async create(dto: T): Promise<T> {
-    const obj = this.newEntity();
+    const obj = this.createNewEntity();
     wrap(obj).assign(dto);
     await this.getEntityRepository().persistAndFlush(obj);
 
@@ -33,6 +33,9 @@ export abstract class MikroOrmCrudServiceBase<T extends BaseEntity<T, PK>, PK ex
    */
   async update(id: Primary<T>, dto: T): Promise<T> {
     const user = await this.get(id);
+    if (!user) {
+      return null;
+    }
     await this.getEntityRepository().assign(user, dto);
     await this.getEntityRepository().flush();
     return user;

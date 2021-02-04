@@ -1,6 +1,7 @@
 import { BaseEntity, Collection, Entity, ManyToOne, OneToMany, PrimaryKey, Property } from '@mikro-orm/core';
 import { User } from './User';
 import { Item } from './Item';
+import { CategoryGroup } from './CategoryGroup';
 
 @Entity()
 export class Category extends BaseEntity<Category, 'id'> {
@@ -18,4 +19,7 @@ export class Category extends BaseEntity<Category, 'id'> {
 
   @OneToMany(() => Item, (item) => item.category)
   items = new Collection<Item>(this);
+
+  @ManyToOne(() => CategoryGroup)
+  categoryGroup!: CategoryGroup;
 }

@@ -1,5 +1,4 @@
 import { BaseEntity, Entity, ManyToOne, PrimaryKey, Property } from '@mikro-orm/core';
-import { User } from './User';
 import { Packing } from './Packing';
 import { Item } from './Item';
 

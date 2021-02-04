@@ -1,6 +1,7 @@
-import { BaseEntity, Entity, ManyToMany, ManyToOne, PrimaryKey, Property } from '@mikro-orm/core';
+import { BaseEntity, Collection, Entity, ManyToMany, ManyToOne, PrimaryKey, Property } from '@mikro-orm/core';
 import { Trip } from './Trip';
 import { User } from './User';
+import { Category } from './Category';
 
 @Entity()
 export class Packing extends BaseEntity<Packing, 'id'> {
@@ -11,8 +12,13 @@ export class Packing extends BaseEntity<Packing, 'id'> {
   name!: string;
 
   @ManyToOne(() => User)
-  caller: User;
+  user: User;
 
-  @ManyToMany({ entity: () => Trip })
+  @ManyToOne(() => Trip)
   trip: Trip;
+
+  constructor(name: string) {
+    super();
+    this.name = name;
+  }
 }

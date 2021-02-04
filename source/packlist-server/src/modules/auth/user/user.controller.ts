@@ -1,10 +1,14 @@
-import { Body, Controller, Delete, Get, Param, ParseBoolPipe, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from '../../../entities/User';
+import { AuthService } from '../auth/auth.service';
 
 @Controller('user')
 export class UserController {
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private authService: AuthService
+  ) {}
 
   @Get()
   async getAllByName(@Query('username') username?: string, @Query('active', ParseIntPipe) active?: number): Promise<User[]> {
@@ -37,11 +41,16 @@ export class UserController {
 
   @Post()
   async create(@Body() dto: User): Promise<User> {
+    this.authService.checkCurrentUserIsAdmin();
+
     return this.userService.create(dto);
   }
 
   @Put('/:id')
   async update(@Param('id', ParseIntPipe) id: number, @Body() dto: User): Promise<User> {
+    if (!this.authService.isCurrentUserAdmin()) {
+      this.authService.checkThisIsCurrentUserId(id);
+    }
     return this.userService.update(id, dto);
   }
 

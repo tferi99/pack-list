@@ -2,6 +2,7 @@ import { BaseEntity, Collection, Entity, OneToMany, PrimaryKey, Property } from 
 import { Category } from './Category';
 import { Trip } from './Trip';
 import { Packing } from './Packing';
+import { UserDto } from '../modules/auth/user/user.dto';
 
 @Entity({ tableName: 'app_user' })
 export class User extends BaseEntity<User, 'id'> {
@@ -21,11 +22,16 @@ export class User extends BaseEntity<User, 'id'> {
   active!: boolean;
 
   @OneToMany(() => Category, (trip) => trip.owner)
-  trips: Collection<Trip> = new Collection<Trip>(this);
+  trips?: Collection<Trip> = new Collection<Trip>(this);
 
   @OneToMany(() => Category, (category) => category.owner)
-  categories: Collection<Category> = new Collection<Category>(this);
+  categories?: Collection<Category> = new Collection<Category>(this);
 
-  @OneToMany(() => Packing, (packing) => packing.caller)
-  packings: Collection<Packing> = new Collection<Packing>(this);
+  @OneToMany(() => Packing, (packing) => packing.user)
+  packings?: Collection<Packing> = new Collection<Packing>(this);
+
+  static create(dto: UserDto): User {
+    const u = new User();
+    return { ...u, ...dto } as User;
+  }
 }
