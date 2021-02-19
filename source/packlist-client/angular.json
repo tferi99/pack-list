@@ -28,6 +28,8 @@
               "projects/packlist/src/assets"
             ],
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "projects/packlist/src/styles.scss"
             ],
             "scripts": []
@@ -91,6 +93,8 @@
               "projects/packlist/src/assets"
             ],
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
               "projects/packlist/src/styles.scss"
             ],
             "scripts": []
@@ -162,7 +166,8 @@
           }
         }
       }
-    }},
+    }
+  },
   "cli": {
     "analytics": false
   },

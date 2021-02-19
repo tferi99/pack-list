@@ -1,0 +1,21 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Name</th>
+    <th scope="col">Admin</th>
+    <th scope="col">Active</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!--
+  <tr *ngFor="let u of users">
+  -->
+  <tr *ngFor="let u of (users$ | async)">
+    <td>{{u.id}}</td>
+    <td>{{u.username}}</td>
+    <td>{{u.admin}}</td>
+    <td>{{u.active}}</td>
+  </tr>
+  </tbody>
+</table>

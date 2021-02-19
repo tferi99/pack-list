@@ -11,6 +11,11 @@ export class UserController {
   ) {}
 
   @Get()
+  async getAll(): Promise<User[]> {
+    return this.userService.getAll();
+  }
+
+  @Get()
   async getAllByName(@Query('username') username?: string, @Query('active', ParseIntPipe) active?: number): Promise<User[]> {
     //const filter = username ? { username } : null;
     const filter = {};
@@ -24,20 +29,15 @@ export class UserController {
     //return this.userService.getByFilter(username);
   }
 
-  @Get()
-  async getAll(): Promise<User[]> {
-    return this.userService.getAll();
-  }
-
   @Get('/test')
   async test(): Promise<void> {
     return this.userService.test();
   }
 
-  @Get('/:id')
+/*  @Get('/:id')
   async get(@Param('id', ParseIntPipe) id: number): Promise<User> {
     return this.userService.get(id);
-  }
+  }*/
 
   @Post()
   async create(@Body() dto: User): Promise<User> {

@@ -1,16 +1,3 @@
-
-export interface IItem {
-  id: number;
-  name: string;
-  order: number;
-  category?: ICategory;
-}
-
-export interface ICategoryGroup  {
-  id: number;
-  name: string;
-}
-
 export interface ICategory {
   id: number;
   name: string;
@@ -19,6 +6,20 @@ export interface ICategory {
   items?: IItem[];
   categoryGroup: ICategoryGroup;
 }
+
+export interface ICategoryGroup  {
+  id: number;
+  name: string;
+}
+
+export interface IItem {
+  id: number;
+  name: string;
+  order: number;
+  category?: ICategory;
+}
+
+
 
 export interface IUser {
   id: number;
