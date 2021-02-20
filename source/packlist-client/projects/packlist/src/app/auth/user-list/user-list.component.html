@@ -8,14 +8,16 @@
   </tr>
   </thead>
   <tbody>
-  <!--
+
   <tr *ngFor="let u of users">
-  -->
-  <tr *ngFor="let u of (users$ | async)">
     <td>{{u.id}}</td>
     <td>{{u.username}}</td>
     <td>{{u.admin}}</td>
     <td>{{u.active}}</td>
+    <td>
+      <button  class="btn btn-outline-primary mr-2" [routerLink]="['/person', u.id, 'edit']"><i class="fas fa-pen"></i></button>
+      <button  class="btn btn-outline-danger" (click)="delete(p)" [disabled]="deleting"><i class="fas fa-trash"></i></button>
+    </td>
   </tr>
   </tbody>
 </table>

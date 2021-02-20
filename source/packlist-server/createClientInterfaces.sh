@@ -47,4 +47,4 @@ BEGIN {
 		}
 	}
 }
-' > ../packlist-client/projects/packlist/src/app/common/entities.ts
+' > ../packlist-client/projects/packlist/src/app/shared/entities.ts

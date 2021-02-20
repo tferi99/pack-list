@@ -1,13 +1,15 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { UserComponent } from './user/user.component';
-import {UserService} from './user.service';
-import { UserListComponent } from './user-list/user-list.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {UserListComponent} from './user-list/user-list.component';
+import {RouterModule} from '@angular/router';
+import {UserFormComponent} from './user-form/user-form.component';
+import {UserMainComponent} from './user-main/user-main.component';
 
 @NgModule({
-  declarations: [UserComponent, UserListComponent],
+  declarations: [UserListComponent, UserFormComponent, UserMainComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   providers: [
   ],
