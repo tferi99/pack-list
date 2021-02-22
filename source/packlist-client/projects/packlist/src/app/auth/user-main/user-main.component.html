@@ -1,0 +1,10 @@
+<h2>User</h2>
+<hr>
+<div class="d-flex flex-row mb-3">
+  <button class="btn btn-primary" [routerLink]="['/user', 'new']">New</button>
+  <button class="btn btn-primary ml-auto" routerLink='/home'><i class="fas fa-home"></i></button>
+</div>
+
+<app-user-list [users]="users" [enableDeletingTrigger]="deleteEnable"></app-user-list>
+
+
