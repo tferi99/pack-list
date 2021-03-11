@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { OrmModule } from './modules/orm/orm.module';
+import { PersonModule } from './modules/person/person.module';
 
 //const logger = new Logger('MikroORM');
 
@@ -22,7 +23,7 @@ import { OrmModule } from './modules/orm/orm.module';
 };*/
 
 @Module({
-  imports: [OrmModule, AuthModule],
+  imports: [OrmModule, AuthModule, PersonModule],
   controllers: [AppController],
   providers: [AppService],
 })

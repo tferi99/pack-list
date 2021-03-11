@@ -20,9 +20,9 @@ export abstract class MikroOrmCrudServiceBase<T extends BaseEntity<T, PK>, PK ex
   async get(id: Primary<T>): Promise<T> {
     //return this.repo.findOne({id});*/
 
-    //User extends BaseEntity
-    const u = this.getEntityRepository().getReference(id);
-    return u.init();
+    // T extends BaseEntity
+    const o = this.getEntityRepository().getReference(id);
+    return o.init();
   }
 
   /**
@@ -32,13 +32,13 @@ export abstract class MikroOrmCrudServiceBase<T extends BaseEntity<T, PK>, PK ex
    * @param dto
    */
   async update(id: Primary<T>, dto: T): Promise<T> {
-    const user = await this.get(id);
-    if (!user) {
+    const o = await this.get(id);
+    if (!o) {
       return null;
     }
-    await this.getEntityRepository().assign(user, dto);
+    await this.getEntityRepository().assign(o, dto);
     await this.getEntityRepository().flush();
-    return user;
+    return o;
   }
 
   async delete(id: Primary<T>) {

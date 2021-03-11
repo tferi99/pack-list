@@ -9,7 +9,8 @@ import { MikroOrmCrudServiceBase } from '../../../common/services/MikroOrmCrudSe
 export class UserService extends MikroOrmCrudServiceBase<User, 'id'> {
   constructor(
     @InjectRepository(User)
-    private readonly repo: EntityRepository<User>, // private readonly orm: MikroORM,
+    private readonly repo: EntityRepository<User>,
+    // private readonly orm: MikroORM,
     private readonly em: EntityManager,
   ) {
     super();
