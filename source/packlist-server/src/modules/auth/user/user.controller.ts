@@ -1,7 +1,21 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query } from '@nestjs/common';
-import { UserService } from './user.service';
-import { User } from '../../../entities/User';
-import { AuthService } from '../auth/auth.service';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+  Query,
+  UsePipes,
+  ValidationPipe
+} from "@nestjs/common";
+import { UserService } from "./user.service";
+import { User } from "../../../entities/User";
+import { AuthService } from "../auth/auth.service";
+import { UserFilterDto } from "./user-filter.dto";
+import { FilterQuery } from '@mikro-orm/core/typings';
 
 @Controller('user')
 export class UserController {
@@ -11,22 +25,8 @@ export class UserController {
   ) {}
 
   @Get()
-  async getAll(): Promise<User[]> {
-    return this.userService.getAll();
-  }
-
-  @Get()
-  async getAllByName(@Query('username') username?: string, @Query('active', ParseIntPipe) active?: number): Promise<User[]> {
-    //const filter = username ? { username } : null;
-    const filter = {};
-    if (username) {
-      filter['username'] = username;
-    }
-    if (active) {
-      filter['active'] = active ? true : false;
-    }
-    return this.userService.getAll(filter);
-    //return this.userService.getByFilter(username);
+  async getAllFiltered(@Query() filter: UserFilterDto): Promise<User[]> {
+    return this.userService.getAll(filter as FilterQuery<User>);
   }
 
   @Get('/test')
@@ -34,10 +34,10 @@ export class UserController {
     return this.userService.test();
   }
 
-/*  @Get('/:id')
+  @Get('/:id')
   async get(@Param('id', ParseIntPipe) id: number): Promise<User> {
     return this.userService.get(id);
-  }*/
+  }
 
   @Post()
   async create(@Body() dto: User): Promise<User> {
