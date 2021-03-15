@@ -1,10 +1,16 @@
-import { IsInt, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
+import { IsBoolean, IsBooleanString, IsInt, IsNotEmpty, IsNumber, IsNumberString, IsOptional } from 'class-validator';
+import { ToBoolean } from '../../common/pipes/to-boolean.func';
 
 export class PersonFilterDto {
-  @IsOptional()
-  @IsInt()
+  //@IsOptional()
+  @IsNumber()
+  //@IsNumberString()
   id: number;
 
-  @IsOptional()
+//  @IsOptional()
   name: string;
+
+//  @IsOptional()
+  //@IsBoolean()
+  test: boolean;
 }

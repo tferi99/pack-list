@@ -8,15 +8,16 @@ async function bootstrap() {
 
   // global pipes
   const validationOpts = {
-    transform: true,
-    transformOptions: {
-      enableImplicitConversion: true,
-      whitelist: true,
-      forbidNonWhitelisted: true,
-    },
+    transform: false,
+/*    transformOptions: {
+      enableImplicitConversion: true,*/
+/*      whitelist: true,
+      forbidNonWhitelisted: true,*/
+//    },
   } as ValidationOptions;
 
-  app.useGlobalPipes(new MyValidationPipe(validationOpts));
+  //app.useGlobalPipes(new MyValidationPipe(validationOpts));
+  app.useGlobalPipes(new MyValidationPipe());
 
   await app.listen(3000);
 }

@@ -4,18 +4,19 @@ import {
   Get,
   HostParam,
   Ip,
-  Param,
+  Param, ParseIntPipe,
   Post,
   Query,
   Req,
   Session,
   UsePipes,
-  ValidationPipe
+  ValidationPipe,
 } from '@nestjs/common';
 import { PersonService } from './person.service';
 import { Person } from '../../entities/Person';
 import { PersonFilterDto } from './person-filter.dto';
 import { MyValidationPipe } from '../../common/pipes/MyValidatorPipe';
+import { IsInt } from 'class-validator';
 
 @Controller('person')
 export class PersonController {
@@ -28,6 +29,20 @@ export class PersonController {
 
   @Get()
   async getAllFiltered(@Query() filter: PersonFilterDto): Promise<Person[]> {
+    console.log('FILTER:', filter);
+    return this.personService.getAll(filter);
+  }
+
+  @Get('/search')
+  async getAll(@Query('id', ParseIntPipe) id: number, @Query('name') name: string): Promise<Person[]> {
+    const filter = {};
+    if (id) {
+      filter['id'] = id;
+    }
+    if (name) {
+      filter['name'] = name;
+    }
+    console.log('FILTER from query params:', filter);
     return this.personService.getAll(filter);
   }
 
