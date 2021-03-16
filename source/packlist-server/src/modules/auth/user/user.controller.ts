@@ -26,6 +26,7 @@ export class UserController {
 
   @Get()
   async getAllFiltered(@Query() filter: UserFilterDto): Promise<User[]> {
+    console.log('FILTER:', filter);
     return this.userService.getAll(filter as FilterQuery<User>);
   }
 
