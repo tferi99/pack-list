@@ -1,7 +1,7 @@
 import { BaseEntity, Collection, Entity, OneToMany, PrimaryKey, Property } from '@mikro-orm/core';
-import { Category } from './Category';
-import { Trip } from './Trip';
-import { Packing } from './Packing';
+import { Category } from './category';
+import { Trip } from './trip';
+import { Packing } from './packing';
 import { UserDto } from '../modules/auth/user/user.dto';
 
 @Entity({ tableName: 'app_user' })

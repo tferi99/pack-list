@@ -1,5 +1,7 @@
 import { IsBoolean, IsBooleanString, IsInt, IsOptional, IsString } from 'class-validator';
 import { Transform, Type } from 'class-transformer';
+import { ToBoolean } from '../../../common/utils/to-boolean';
+import { ToBooleanOld } from '../../../common/utils/to-boolean-old';
 
 export class UserFilterDto {
   @IsOptional()
@@ -10,13 +12,8 @@ export class UserFilterDto {
   @IsString()
   username: string;
 
-/*  @Transform(({ value }) => {
-    const v = value == 'true';
-    const r = { from: value, to: v };
-    console.log('TRANSFORM:', r)
-    return v;
-  }, {})*/
-  //@IsOptional()
+  @ToBoolean()
+  //@ToBooleanOld()
   @IsBoolean()
   active: boolean;
 }

@@ -1,6 +1,6 @@
 import { BaseEntity, Entity, ManyToOne, PrimaryKey, Property } from '@mikro-orm/core';
-import { Packing } from './Packing';
-import { Item } from './Item';
+import { Packing } from './packing';
+import { Item } from './item';
 
 @Entity()
 export class PackingItem extends BaseEntity<PackingItem, 'id'> {

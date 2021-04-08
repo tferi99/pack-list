@@ -1,4 +1,4 @@
-import { User } from '../entities/User';
+import { User } from '../entities/user';
 
 export const CURRENT_USER = User.create({
   id: 0,

@@ -1,7 +1,7 @@
 import { BaseEntity, Collection, Entity, ManyToOne, OneToMany, PrimaryKey, Property } from '@mikro-orm/core';
-import { User } from './User';
-import { Item } from './Item';
-import { CategoryGroup } from './CategoryGroup';
+import { User } from './user';
+import { Item } from './item';
+import { CategoryGroup } from './category-group';
 
 @Entity()
 export class Category extends BaseEntity<Category, 'id'> {

@@ -13,9 +13,9 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { PersonService } from './person.service';
-import { Person } from '../../entities/Person';
+import { Person } from '../../entities/person';
 import { PersonFilterDto } from './person-filter.dto';
-import { MyValidationPipe } from '../../common/pipes/MyValidatorPipe';
+import { ValidationPipeWithLog } from '../../common/pipes/validator-pipe-with-log';
 import { IsInt } from 'class-validator';
 
 @Controller('person')

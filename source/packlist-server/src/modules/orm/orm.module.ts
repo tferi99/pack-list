@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
-import { User } from '../../entities/User';
-import { Person } from '../../entities/Person';
+import { User } from '../../entities/user';
+import { Person } from '../../entities/person';
 
 @Module({
   imports: [

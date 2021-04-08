@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { EntityRepository, QueryOrder, wrap } from '@mikro-orm/core';
-import { Person } from '../../entities/Person';
+import { Person } from '../../entities/person';
 import { FilterQuery } from '@mikro-orm/core/typings';
-import { User } from '../../entities/User';
+import { User } from '../../entities/user';
 
 @Injectable()
 export class PersonService { //extends MikroOrmCrudServiceBase<Person, 'id'> {

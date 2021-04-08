@@ -1,5 +1,5 @@
 import { Injectable, NotAcceptableException, UnauthorizedException } from '@nestjs/common';
-import { User } from '../../../entities/User';
+import { User } from '../../../entities/user';
 import { wrap } from '@mikro-orm/core';
 import { CURRENT_USER } from '../../../common/app-constants';
 
