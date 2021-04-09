@@ -13,6 +13,7 @@ export class UserFilterDto {
   username: string;
 
   @ToBoolean()
+  @IsOptional()
   //@ToBooleanOld()
   @IsBoolean()
   active: boolean;

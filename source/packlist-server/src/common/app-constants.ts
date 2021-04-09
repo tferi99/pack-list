@@ -1,7 +1,9 @@
 import { User } from '../entities/user';
 
-export const CURRENT_USER = User.create({
+export const DEFAULT_ADMIN = {
   id: 0,
-  username: 'Admin',
+  username: 'admin',
+  password: '12345',
+  active: true,
   admin: true,
-});
+}
