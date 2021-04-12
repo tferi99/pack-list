@@ -17,7 +17,15 @@ export class ValidationPipeWithLog extends ValidationPipe {
     console.log('---------------- ValidationPipeWithLog transformation ----------------');
     console.log('ValidationPipeWithLog - incoming value:', value);
     console.log('ValidationPipeWithLog - metatype for transformation:', metatype);
-    const o = await super.transform(value, metatype);
+    let o;
+    try {
+      o = await super.transform(value, metatype);
+    } catch (e) {
+      //console.log('Error:', e);
+      console.log(`Error[${e.response.statusCode}]:`, e.response.message);
+      console.log('-----------------------------------------------------------------');
+      throw e;
+    }
     console.log('Transformed to:', o);
     console.log('-----------------------------------------------------------------');
     return o;

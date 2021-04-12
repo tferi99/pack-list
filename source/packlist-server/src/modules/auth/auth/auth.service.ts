@@ -1,14 +1,16 @@
 import { Injectable, NotAcceptableException, UnauthorizedException } from '@nestjs/common';
 import { User } from '../../../entities/user';
-import { wrap } from '@mikro-orm/core';
-import { CURRENT_USER } from '../../../common/app-constants';
+import { DEFAULT_ADMIN } from '../../../common/app-constants';
+import { UserController } from '../user/user.controller';
+import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export class AuthService {
   currentUserTEST: User;
 
   constructor() {
-    this.currentUserTEST = CURRENT_USER;
+    this.currentUserTEST = plainToClass(User, DEFAULT_ADMIN);
+
     //this.currentUserTEST = null;
   }
 
