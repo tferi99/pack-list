@@ -17,21 +17,6 @@ export class UserController {
     return this.userService.getAll(filter as FilterQuery<User>);
   }
 
-  @Get('/test')
-  async test(): Promise<void> {
-    const o = {
-      username: 'Joe',
-      active: '0',
-    };
-    //const ct = new ClassTransformer();
-    //const u = ct.plainToClass(UserFilterDto, o);
-    const u = plainToClass(UserFilterDto, o, { enableImplicitConversion: true });
-    console.log('Transformed:', u);
-
-    //return this.userService.test();
-    return null;
-  }
-
   @Get('/:id')
   async get(@Param('id', ParseIntPipe) id: number): Promise<User> {
     return this.userService.get(id);
@@ -55,5 +40,20 @@ export class UserController {
   @Delete('/:id')
   async delete(@Param('id', ParseIntPipe) id: number) {
     this.userService.delete(id);
+  }
+
+  @Get('/test')
+  async test(): Promise<void> {
+    const o = {
+      username: 'Joe',
+      active: '0',
+    };
+    //const ct = new ClassTransformer();
+    //const u = ct.plainToClass(UserFilterDto, o);
+    const u = plainToClass(UserFilterDto, o, { enableImplicitConversion: true });
+    console.log('Transformed:', u);
+
+    //return this.userService.test();
+    return null;
   }
 }

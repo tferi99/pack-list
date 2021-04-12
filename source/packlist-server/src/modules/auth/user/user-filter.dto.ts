@@ -4,16 +4,21 @@ import { ToBoolean } from '../../../common/utils/to-boolean';
 import { ToBooleanOld } from '../../../common/utils/to-boolean-old';
 
 export class UserFilterDto {
-  @IsOptional()
   @IsInt()
+  @IsOptional()
   id: number;
 
-  @IsOptional()
   @IsString()
+  @IsOptional()
   username: string;
 
   @ToBoolean()
-  //@ToBooleanOld()
   @IsBoolean()
+  @IsOptional()
   active: boolean;
+
+  @ToBoolean()
+  @IsBoolean()
+  @IsOptional()
+  admin: boolean;
 }
