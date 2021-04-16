@@ -29,7 +29,7 @@ async function bootstrap() {
   } as ValidationPipeOptions;
 
   app.useGlobalPipes(new ValidationPipeWithLog(validationOpts));
-
+  app.enableCors();
   await app.listen(3000);
 }
 bootstrap();
