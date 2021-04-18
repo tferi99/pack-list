@@ -1,11 +1,3 @@
-/*export default {
-  dbName: 'packlist',
-  type: 'postgresql',
-  entitiesTs: ['./src/entities'],
-  entities: ['./dist/entities'],
-  autoLoadEntities: true,
-};*/
-
 import { UnderscoreNamingStrategy } from '@mikro-orm/core';
 import { SqlHighlighter } from '@mikro-orm/sql-highlighter';
 import { logger } from '@mikro-orm/nestjs';

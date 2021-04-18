@@ -2,7 +2,8 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipeWithLog } from './common/pipes/validator-pipe-with-log';
 import { validate, ValidationOptions } from 'class-validator';
-import { ValidationPipeOptions } from '@nestjs/common';
+import { Logger, ValidationPipeOptions } from '@nestjs/common';
+import { ConfigReader } from 'neconfig';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -28,8 +29,15 @@ async function bootstrap() {
     },
   } as ValidationPipeOptions;
 
+  const log = new Logger('main');
   app.useGlobalPipes(new ValidationPipeWithLog(validationOpts));
   app.enableCors();
-  await app.listen(3000);
+
+  // reading config from .env or from environment
+  const config = app.get(ConfigReader);
+  const port = config.getIntOrThrow('PORT');
+
+  log.debug('Listening on: ' + port);
+  await app.listen(port);
 }
 bootstrap();
